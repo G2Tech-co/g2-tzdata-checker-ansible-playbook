@@ -1,0 +1,9 @@
+- name: Get tzdata version number
+  ansible.builtin.shell: dpkg -s tzdata | grep -i version
+  register: tzdata_current_version
+  changed_when: true
+
+- name: Print the tzdata latest version number when defined
+  ansible.builtin.debug:
+    msg: Output is {{ tzdata_current_version.stdout }}
+  when: tzdata_current_version is defined
